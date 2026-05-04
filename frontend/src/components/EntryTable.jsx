@@ -155,7 +155,7 @@ export default function EntryTable({ event, setEvent }) {
                     <input placeholder="Pincode"
                         value={form.pincode}
                         onChange={e => setForm({ ...form, pincode: e.target.value })}
-                        className="p-1 rounded bg-white/20 text-sm" required />
+                        className="p-1 rounded bg-white/20 text-sm" />
 
                     <input type="number" placeholder="Amount"
                         value={form.amount}
