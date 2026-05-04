@@ -1,0 +1,95 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-50;
+} */
+ @import "tailwindcss";
+
+
+
+
+ /* Gradient Animation */
+ @keyframes gradientMove {
+   0% {
+     background-position: 0% 50%;
+   }
+
+   50% {
+     background-position: 100% 50%;
+   }
+
+   100% {
+     background-position: 0% 50%;
+   }
+ }
+
+ .animate-gradient {
+   background-size: 300% 300%;
+   animation: gradientMove 8s ease infinite;
+ }
+
+ /* Confetti Fall */
+ @keyframes fall {
+   0% {
+     transform: translateY(-10vh) translateX(0) rotate(0deg);
+     opacity: 1;
+   }
+
+   100% {
+     transform: translateY(110vh) translateX(50px) rotate(360deg);
+     opacity: 0;
+   }
+ }
+
+ /* Popup Scale Animation */
+ @keyframes scaleIn {
+   0% {
+     transform: scale(0.7);
+     opacity: 0;
+   }
+
+   100% {
+     transform: scale(1);
+     opacity: 1;
+   }
+ }
+
+ .animate-scaleIn {
+   animation: scaleIn 0.4s ease-out;
+ }
+
+
+ /* Gradient animation */
+ @keyframes gradientMove {
+   0% {
+     background-position: 0% 50%;
+   }
+
+   50% {
+     background-position: 100% 50%;
+   }
+
+   100% {
+     background-position: 0% 50%;
+   }
+ }
+
+ .animate-gradient {
+   background-size: 300% 300%;
+   animation: gradientMove 8s ease infinite;
+ }
+
+ /* Confetti */
+ @keyframes fall {
+   0% {
+     transform: translateY(-10vh) translateX(0) rotate(0deg);
+     opacity: 1;
+   }
+
+   100% {
+     transform: translateY(110vh) translateX(50px) rotate(360deg);
+     opacity: 0;
+   }
+ }
