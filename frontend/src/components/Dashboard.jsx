@@ -68,7 +68,7 @@ export default function Dashboard() {
                 <h1 className="text-2xl font-bold tracking-wide"> Shagun</h1>
 
                 <div className="flex items-center gap-4">
-                    <span className="text-white/90">Welcome, {user?.name}</span>
+                    <span className="text-white/90">🙏🙏, {user?.name}</span>
 
                     <button
                         onClick={logout}
