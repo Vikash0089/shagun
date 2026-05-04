@@ -88,7 +88,7 @@ export default function Register() {
             >
 
                 <h2 className="text-3xl font-bold text-center text-white mb-6">
-                    💍 Shagun-Hisab Register
+                    🙏 Join Shagun 🙏
                 </h2>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
