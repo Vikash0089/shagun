@@ -88,7 +88,7 @@ export default function Login() {
             >
 
                 <h2 className="text-3xl font-bold text-center text-white mb-6">
-                    💍 Shagun-Hisab Login
+                   🙏🙏 Welcome to Shagun
                 </h2>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
