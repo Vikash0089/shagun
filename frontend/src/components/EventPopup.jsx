@@ -68,7 +68,7 @@ export default function EventPopup({ onEventCreated, onClose }) {
                     {/* Name */}
                     <input
                         type="text"
-                        placeholder="Naam"
+                        placeholder="Add Name"
                         value={form.personName}
                         onChange={e => setForm({ ...form, personName: e.target.value })}
                         required
@@ -79,6 +79,7 @@ export default function EventPopup({ onEventCreated, onClose }) {
                     {/* Date */}
                     <input
                         type="date"
+                        placeholder = "Add Event Date"
                         value={form.eventDate}
                         onChange={e => setForm({ ...form, eventDate: e.target.value })}
                         required
