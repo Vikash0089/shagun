@@ -148,7 +148,7 @@ export default function Dashboard() {
 
                                         {/* Date */}
                                         <p className="text-lg text-yellow-200 mb-4">
-                                            📅 {new Date(event.eventDate).toLocaleDateString('en-IN', {
+                                            {new Date(event.eventDate).toLocaleDateString('en-IN', {
                                                 day: 'numeric',
                                                 month: 'long',
                                                 year: 'numeric'
