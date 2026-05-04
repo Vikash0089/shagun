@@ -3,13 +3,13 @@ import { useNavigate, Link } from 'react-router-dom';
 import API from '../api/axios';
 import toast from 'react-hot-toast';
 
-export default function Login() {
-    const [form, setForm] = useState({ email: '', password: '' });
+export default function Register() {
+    const [form, setForm] = useState({ name: '', email: '', password: '' });
     const [tilt, setTilt] = useState({ x: 0, y: 0 });
     const [particles, setParticles] = useState([]);
-    const navigate = useNavigate(); // ✅ FIX
+    const navigate = useNavigate();
 
-    // 🎉 Confetti particles
+    // 🎉 Confetti
     useEffect(() => {
         const temp = Array.from({ length: 35 }).map((_, i) => ({
             id: i,
@@ -37,19 +37,19 @@ export default function Login() {
         setTilt({ x: 0, y: 0 });
     };
 
-    // 🔐 Login
+    // 📝 Register
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await API.post('/auth/login', form);
+            const { data } = await API.post('/auth/register', form);
 
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
 
-            toast.success('Login successful 🎉');
+            toast.success('Account ban gaya 🎉');
             navigate('/dashboard');
         } catch (err) {
-            toast.error(err.response?.data?.msg || 'Login failed');
+            toast.error(err.response?.data?.msg || 'Register failed');
         }
     };
 
@@ -88,19 +88,29 @@ export default function Login() {
             >
 
                 <h2 className="text-3xl font-bold text-center text-white mb-6">
-                    💍 Shagun-Hisab Login
+                    💍 Shagun-Hisab Register
                 </h2>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
+
+                    <input
+                        type="text"
+                        placeholder="Full Name"
+                        value={form.name}
+                        onChange={e => setForm({ ...form, name: e.target.value })}
+                        required
+                        className="w-full p-3 rounded-lg bg-white/20 text-white 
+                        placeholder-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                    />
 
                     <input
                         type="email"
                         placeholder="Email"
                         value={form.email}
                         onChange={e => setForm({ ...form, email: e.target.value })}
+                        required
                         className="w-full p-3 rounded-lg bg-white/20 text-white 
                         placeholder-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                        required
                     />
 
                     <input
@@ -108,9 +118,9 @@ export default function Login() {
                         placeholder="Password"
                         value={form.password}
                         onChange={e => setForm({ ...form, password: e.target.value })}
+                        required
                         className="w-full p-3 rounded-lg bg-white/20 text-white 
                         placeholder-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                        required
                     />
 
                     <button
@@ -119,14 +129,14 @@ export default function Login() {
                         text-white py-3 rounded-lg font-semibold transition duration-300 
                         shadow-lg hover:shadow-yellow-500/50"
                     >
-                        Login
+                        Register
                     </button>
                 </form>
 
                 <p className="text-center mt-4 text-white">
-                    New user?{" "}
-                    <Link to="/register" className="text-yellow-300 font-semibold hover:underline">
-                        Register
+                    Already have account?{" "}
+                    <Link to="/" className="text-yellow-300 font-semibold hover:underline">
+                        Login
                     </Link>
                 </p>
             </div>
