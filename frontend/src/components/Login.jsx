@@ -7,7 +7,7 @@ export default function Login() {
     const [form, setForm] = useState({ email: '', password: '' });
     const [tilt, setTilt] = useState({ x: 0, y: 0 });
     const [particles, setParticles] = useState([]);
-    const navigate = useNavigate(); // ✅ FIX
+    const navigate = useNavigate(); 
 
     // 🎉 Confetti particles
     useEffect(() => {
@@ -21,7 +21,7 @@ export default function Login() {
         setParticles(temp);
     }, []);
 
-    // 🖱️ 3D Tilt
+    
     const handleMouseMove = (e) => {
         const rect = e.currentTarget.getBoundingClientRect();
         const x = (e.clientY - rect.top) / rect.height - 0.5;
@@ -88,7 +88,7 @@ export default function Login() {
             >
 
                 <h2 className="text-3xl font-bold text-center text-white mb-6">
-                   🙏🙏 Welcome to Shagun
+                   🙏 Shagun 🙏
                 </h2>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
