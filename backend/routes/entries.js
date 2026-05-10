@@ -69,6 +69,46 @@ router.delete('/:eventId/:entryId', auth, async (req, res) => {
     }
 });
 
+router.put('/qr/:eventId', auth, async (req, res) => {
+
+    try {
+
+        const { upiId, name } = req.body;
+
+        const event = await Event.findOne({
+            _id: req.params.eventId,
+            user: req.user
+        });
+
+        if (!event) {
+            return res.status(404).json({
+                msg: 'Event not found'
+            });
+        }
+
+        // ✅ SAFE UPDATE
+        event.qrPayment = {
+            upiId,
+            name
+        };
+
+        await event.save();
+
+        res.json({
+            msg: 'QR updated successfully',
+            event
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).json({
+            error: err.message
+        });
+    }
+});
+
 router.put('/:eventId/:entryId', auth, async (req, res) => {
     try {
         const { fullName, address, pincode, amount } = req.body;
