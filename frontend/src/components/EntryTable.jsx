@@ -1,11 +1,13 @@
 import { useState, useMemo } from 'react';
 import API from '../api/axios';
 import toast from 'react-hot-toast';
+import QRPaymentModal from './QRPaymentModal';
 import {
     FiEdit2,
     FiTrash2,
     FiDownload,
     FiSearch,
+    FiCreditCard
     FiPlus,
     FiX
 } from 'react-icons/fi';
@@ -16,6 +18,7 @@ export default function EntryTable({ event, setEvent }) {
     const [editingId, setEditingId] = useState(null);
     const [search, setSearch] = useState('');
     const [showForm, setShowForm] = useState(false);
+    const [showQR, setShowQR] = useState(false);
 
     // 🔍 Filter
     const filteredEntries = useMemo(() => {
@@ -134,6 +137,12 @@ export default function EntryTable({ event, setEvent }) {
                     >
                         <FiDownload /> CSV
                     </button>
+                    <button
+                        onClick={() => setShowQR(true)}
+                        className="flex items-center gap-1 bg-purple-600 px-3 py-1 rounded"
+                    >
+                        <FiCreditCard /> QR
+                    </button>
                 </div>
             </div>
 
@@ -215,6 +224,13 @@ export default function EntryTable({ event, setEvent }) {
 
                 </table>
             </div>
+            {showQR && (
+                <QRPaymentModal
+                    event={event}
+                    setEvent={setEvent}
+                    onClose={() => setShowQR(false)}
+                />
+            )}
         </div>
     );
 }
