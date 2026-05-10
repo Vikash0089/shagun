@@ -7,7 +7,7 @@ import {
     FiTrash2,
     FiDownload,
     FiSearch,
-    FiCreditCard
+    FiCreditCard,
     FiPlus,
     FiX
 } from 'react-icons/fi';
