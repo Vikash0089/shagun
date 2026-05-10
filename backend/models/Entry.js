@@ -20,6 +20,18 @@ const eventSchema = new mongoose.Schema({
     },
     personName: { type: String, required: true },
     eventDate: { type: Date, required: true },
+    qrPayment: {
+        upiId: {
+            type: String,
+            default: ''
+        },
+        name: {
+            type: String,
+            default: ''
+        }
+    },
+
+    
     entries: [entrySchema]
 }, { timestamps: true });
 
