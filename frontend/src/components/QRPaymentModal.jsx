@@ -15,7 +15,11 @@ export default function QRPaymentModal({ event, setEvent, onClose }) {
         !!event.qrPayment?.upiId
     );
 
+    // ✅ Show / Hide Form
+    const [showForm, setShowForm] = useState(false);
+
     const saveQR = async (e) => {
+
         e.preventDefault();
 
         try {
@@ -31,8 +35,14 @@ export default function QRPaymentModal({ event, setEvent, onClose }) {
 
             setShowQR(true);
 
+            // optional
+            setShowForm(false);
+
         } catch (err) {
+
             toast.error('Failed');
+
+            console.log(err);
         }
     };
 
@@ -40,9 +50,10 @@ export default function QRPaymentModal({ event, setEvent, onClose }) {
         `upi://pay?pa=${form.upiId}&pn=${form.name}&cu=INR`;
 
     return (
+
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-3">
 
-            <div className="bg-white rounded-2xl w-full max-w-md p-5 relative text-black">
+            <div className="bg-white rounded-2xl w-full max-w-md p-5 relative text-black shadow-2xl">
 
                 {/* Close */}
                 <button
@@ -52,80 +63,114 @@ export default function QRPaymentModal({ event, setEvent, onClose }) {
                     <FiX size={22} />
                 </button>
 
-                <h2 className="text-2xl font-bold text-center mb-4">
-                    💳 Online Payment
+                {/* Heading */}
+                <h2 className="text-2xl font-bold text-center mb-5">
+                    💳 QR Payment Setup
                 </h2>
 
-                {/* FORM */}
-                <form onSubmit={saveQR} className="space-y-3">
-
-                    <input
-                        type="text"
-                        placeholder="UPI ID"
-                        value={form.upiId}
-                        onChange={(e) =>
-                            setForm({
-                                ...form,
-                                upiId: e.target.value
-                            })
-                        }
-                        className="w-full border p-3 rounded-lg outline-none"
-                        required
-                    />
-
-                    <input
-                        type="text"
-                        placeholder="Name"
-                        value={form.name}
-                        onChange={(e) =>
-                            setForm({
-                                ...form,
-                                name: e.target.value
-                            })
-                        }
-                        className="w-full border p-3 rounded-lg outline-none"
-                        required
-                    />
+                {/* SHOW BUTTON */}
+                <div className="mb-4">
 
                     <button
-                        className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold"
+                        type="button"
+                        onClick={() => setShowForm(!showForm)}
+                        className="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white py-3 rounded-xl font-semibold"
                     >
-                        Save QR
+                        {showForm
+                            ? 'Hide QR Setup'
+                            : 'Show QR Setup'}
                     </button>
 
-                </form>
+                </div>
+
+                {/* FORM */}
+                {showForm && (
+
+                    <form onSubmit={saveQR} className="space-y-4">
+
+                        {/* UPI */}
+                        <input
+                            type="text"
+                            placeholder="Enter UPI ID"
+                            value={form.upiId}
+                            onChange={(e) =>
+                                setForm({
+                                    ...form,
+                                    upiId: e.target.value
+                                })
+                            }
+                            className="w-full border border-gray-300 p-3 rounded-lg outline-none focus:border-purple-500"
+                            required
+                        />
+
+                        {/* NAME */}
+                        <input
+                            type="text"
+                            placeholder="Enter UPI Name"
+                            value={form.name}
+                            onChange={(e) =>
+                                setForm({
+                                    ...form,
+                                    name: e.target.value
+                                })
+                            }
+                            className="w-full border border-gray-300 p-3 rounded-lg outline-none focus:border-purple-500"
+                        />
+
+                        {/* SAVE */}
+                        <button
+                            className="w-full bg-gradient-to-r from-purple-600 to-pink-500 hover:opacity-90 text-white py-3 rounded-lg font-semibold transition"
+                        >
+                            Save QR
+                        </button>
+
+                    </form>
+
+                )}
 
                 {/* QR SHOW */}
                 {showQR && (
+
                     <div className="mt-6 text-center">
 
-                        <QRCodeCanvas
-                            value={upiLink}
-                            size={220}
-                        />
+                        <div className="flex justify-center">
 
-                        <div className="mt-4 text-sm bg-gray-100 rounded-lg p-3">
+                            <div className="bg-white p-3 rounded-xl shadow-lg">
+
+                                <QRCodeCanvas
+                                    value={upiLink}
+                                    size={220}
+                                />
+
+                            </div>
+
+                        </div>
+
+                        {/* Details */}
+                        <div className="mt-4 text-sm bg-gray-100 rounded-xl p-4">
 
                             <table className="w-full text-left">
 
                                 <tbody>
 
-                                    <tr>
-                                        <td className="font-semibold py-1">
-                                            Name
-                                        </td>
+                                    {form.name && (
+                                        <tr>
+                                            <td className="font-semibold py-1">
+                                                Name
+                                            </td>
 
-                                        <td>
-                                            {form.name}
-                                        </td>
-                                    </tr>
+                                            <td>
+                                                {form.name}
+                                            </td>
+                                        </tr>
+                                    )}
 
                                     <tr>
                                         <td className="font-semibold py-1">
                                             UPI ID
                                         </td>
 
-                                        <td>
+                                        <td className="break-all">
                                             {form.upiId}
                                         </td>
                                     </tr>
@@ -137,9 +182,11 @@ export default function QRPaymentModal({ event, setEvent, onClose }) {
                         </div>
 
                     </div>
+
                 )}
 
             </div>
+
         </div>
     );
 }
