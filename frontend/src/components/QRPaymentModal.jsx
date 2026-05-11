@@ -65,7 +65,7 @@ export default function QRPaymentModal({ event, setEvent, onClose }) {
 
                 {/* Heading */}
                 <h2 className="text-2xl font-bold text-center mb-5">
-                    💳 QR Payment Setup
+                    💳 Online Payment
                 </h2>
 
                 {/* SHOW BUTTON */}
